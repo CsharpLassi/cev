@@ -14,3 +14,6 @@ class UserCEVListener(cevListener):
 
     def exitSeries_connection(self, ctx: cevParser.Series_connectionContext):
         self.code.append(OpCodes.CALC_SERIES)
+
+    def exitParallel_connection(self, ctx: cevParser.Parallel_connectionContext):
+        self.code.append(OpCodes.CALC_PARALLEL)

@@ -6,3 +6,4 @@ class OpCodes(Enum):
     CREATE_RESISTOR = 0
     SET_VALUE = 1
     CALC_SERIES = 2
+    CALC_PARALLEL = 3

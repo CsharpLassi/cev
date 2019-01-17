@@ -14,5 +14,11 @@ class Resistor:
 
         raise RuntimeError("Add is not allowed with '%s'" % other)
 
+    def __or__(self, other):
+        if isinstance(other, Resistor):
+            return Resistor(self.value * other.value / (self.value + other.value))
+
+        raise RuntimeError("Add is not allowed with '%s'" % other)
+
     def __repr__(self):
         return "R: %d Ohm" % self.value

@@ -17,6 +17,15 @@ class cevListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by cevParser#parallel_connection.
+    def enterParallel_connection(self, ctx:cevParser.Parallel_connectionContext):
+        pass
+
+    # Exit a parse tree produced by cevParser#parallel_connection.
+    def exitParallel_connection(self, ctx:cevParser.Parallel_connectionContext):
+        pass
+
+
     # Enter a parse tree produced by cevParser#element.
     def enterElement(self, ctx:cevParser.ElementContext):
         pass

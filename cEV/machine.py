@@ -21,6 +21,7 @@ class Machine:
             OpCodes.CREATE_RESISTOR: self.__create_resitor,
             OpCodes.SET_VALUE: self.__set_value,
             OpCodes.CALC_SERIES: self.__calc_series,
+            OpCodes.CALC_PARALLEL: self.__calc_parallel,
                              }
 
     def run(self):
@@ -57,3 +58,6 @@ class Machine:
 
     def __calc_series(self):
         self.push(self.pop() + self.pop())
+
+    def __calc_parallel(self):
+        self.push(self.pop() | self.pop())

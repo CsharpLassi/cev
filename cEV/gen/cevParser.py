@@ -8,15 +8,16 @@ import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\6")
-        buf.write("\31\4\2\t\2\4\3\t\3\4\4\t\4\3\2\3\2\3\3\3\3\3\3\3\3\3")
-        buf.write("\3\3\3\7\3\21\n\3\f\3\16\3\24\13\3\3\4\3\4\3\4\3\4\2\3")
-        buf.write("\4\5\2\4\6\2\2\2\26\2\b\3\2\2\2\4\n\3\2\2\2\6\25\3\2\2")
-        buf.write("\2\b\t\5\4\3\2\t\3\3\2\2\2\n\13\b\3\1\2\13\f\5\6\4\2\f")
-        buf.write("\22\3\2\2\2\r\16\f\4\2\2\16\17\7\3\2\2\17\21\5\4\3\5\20")
-        buf.write("\r\3\2\2\2\21\24\3\2\2\2\22\20\3\2\2\2\22\23\3\2\2\2\23")
-        buf.write("\5\3\2\2\2\24\22\3\2\2\2\25\26\7\4\2\2\26\27\7\5\2\2\27")
-        buf.write("\7\3\2\2\2\3\22")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\7")
+        buf.write("\34\4\2\t\2\4\3\t\3\4\4\t\4\3\2\3\2\3\3\3\3\3\3\3\3\3")
+        buf.write("\3\3\3\3\3\3\3\3\3\7\3\24\n\3\f\3\16\3\27\13\3\3\4\3\4")
+        buf.write("\3\4\3\4\2\3\4\5\2\4\6\2\2\2\32\2\b\3\2\2\2\4\n\3\2\2")
+        buf.write("\2\6\30\3\2\2\2\b\t\5\4\3\2\t\3\3\2\2\2\n\13\b\3\1\2\13")
+        buf.write("\f\5\6\4\2\f\25\3\2\2\2\r\16\f\5\2\2\16\17\7\3\2\2\17")
+        buf.write("\24\5\4\3\6\20\21\f\4\2\2\21\22\7\4\2\2\22\24\5\4\3\5")
+        buf.write("\23\r\3\2\2\2\23\20\3\2\2\2\24\27\3\2\2\2\25\23\3\2\2")
+        buf.write("\2\25\26\3\2\2\2\26\5\3\2\2\2\27\25\3\2\2\2\30\31\7\5")
+        buf.write("\2\2\31\32\7\6\2\2\32\7\3\2\2\2\4\23\25")
         return buf.getvalue()
 
 
@@ -30,9 +31,10 @@ class cevParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "'+'", "<INVALID>", "<INVALID>", "' '" ]
+    literalNames = [ "<INVALID>", "'+'", "'||'", "<INVALID>", "<INVALID>", 
+                     "' '" ]
 
-    symbolicNames = [ "<INVALID>", "<INVALID>", "NUMBER", "UNIT_RESISTOR", 
+    symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "NUMBER", "UNIT_RESISTOR", 
                       "WHITESPACE" ]
 
     RULE_stmt = 0
@@ -43,9 +45,10 @@ class cevParser ( Parser ):
 
     EOF = Token.EOF
     T__0=1
-    NUMBER=2
-    UNIT_RESISTOR=3
-    WHITESPACE=4
+    T__1=2
+    NUMBER=3
+    UNIT_RESISTOR=4
+    WHITESPACE=5
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -112,6 +115,28 @@ class cevParser ( Parser ):
             super().copyFrom(ctx)
 
 
+    class Parallel_connectionContext(ConnectionContext):
+
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a cevParser.ConnectionContext
+            super().__init__(parser)
+            self.copyFrom(ctx)
+
+        def connection(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(cevParser.ConnectionContext)
+            else:
+                return self.getTypedRuleContext(cevParser.ConnectionContext,i)
+
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterParallel_connection" ):
+                listener.enterParallel_connection(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitParallel_connection" ):
+                listener.exitParallel_connection(self)
+
+
     class ElementContext(ConnectionContext):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a cevParser.ConnectionContext
@@ -170,27 +195,47 @@ class cevParser ( Parser ):
             self.state = 9
             self.resistor()
             self._ctx.stop = self._input.LT(-1)
-            self.state = 16
+            self.state = 19
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,0,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,1,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    localctx = cevParser.Series_connectionContext(self, cevParser.ConnectionContext(self, _parentctx, _parentState))
-                    self.pushNewRecursionContext(localctx, _startState, self.RULE_connection)
-                    self.state = 11
-                    if not self.precpred(self._ctx, 2):
-                        from antlr4.error.Errors import FailedPredicateException
-                        raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                    self.state = 12
-                    self.match(cevParser.T__0)
-                    self.state = 13
-                    self.connection(3) 
-                self.state = 18
+                    self.state = 17
+                    self._errHandler.sync(self)
+                    la_ = self._interp.adaptivePredict(self._input,0,self._ctx)
+                    if la_ == 1:
+                        localctx = cevParser.Series_connectionContext(self, cevParser.ConnectionContext(self, _parentctx, _parentState))
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_connection)
+                        self.state = 11
+                        if not self.precpred(self._ctx, 3):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
+                        self.state = 12
+                        self.match(cevParser.T__0)
+                        self.state = 13
+                        self.connection(4)
+                        pass
+
+                    elif la_ == 2:
+                        localctx = cevParser.Parallel_connectionContext(self, cevParser.ConnectionContext(self, _parentctx, _parentState))
+                        self.pushNewRecursionContext(localctx, _startState, self.RULE_connection)
+                        self.state = 14
+                        if not self.precpred(self._ctx, 2):
+                            from antlr4.error.Errors import FailedPredicateException
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
+                        self.state = 15
+                        self.match(cevParser.T__1)
+                        self.state = 16
+                        self.connection(3)
+                        pass
+
+             
+                self.state = 21
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,0,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,1,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -234,9 +279,9 @@ class cevParser ( Parser ):
         self.enterRule(localctx, 4, self.RULE_resistor)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 19
+            self.state = 22
             localctx.value = self.match(cevParser.NUMBER)
-            self.state = 20
+            self.state = 23
             self.match(cevParser.UNIT_RESISTOR)
         except RecognitionException as re:
             localctx.exception = re
@@ -260,6 +305,10 @@ class cevParser ( Parser ):
 
     def connection_sempred(self, localctx:ConnectionContext, predIndex:int):
             if predIndex == 0:
+                return self.precpred(self._ctx, 3)
+         
+
+            if predIndex == 1:
                 return self.precpred(self._ctx, 2)
          
 
