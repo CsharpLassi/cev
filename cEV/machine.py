@@ -19,7 +19,8 @@ class Machine:
         self.code = code
         self.dispatch_map = {
             OpCodes.CREATE_RESISTOR: self.__create_resitor,
-            OpCodes.SET_VALUE: self.__set_value
+            OpCodes.SET_VALUE: self.__set_value,
+            OpCodes.CALC_SERIES: self.__calc_series,
                              }
 
     def run(self):
@@ -53,3 +54,6 @@ class Machine:
         element = self.pop()
         element.value = value
         self.push(element)
+
+    def __calc_series(self):
+        self.push(self.pop() + self.pop())

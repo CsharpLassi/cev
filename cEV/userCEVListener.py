@@ -11,3 +11,6 @@ class UserCEVListener(cevListener):
         self.code.append(OpCodes.CREATE_RESISTOR)
         self.code.append(float(ctx.value.text))
         self.code.append(OpCodes.SET_VALUE)
+
+    def exitSeries_connection(self, ctx: cevParser.Series_connectionContext):
+        self.code.append(OpCodes.CALC_SERIES)

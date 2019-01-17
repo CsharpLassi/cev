@@ -5,3 +5,4 @@ from enum import Enum, unique
 class OpCodes(Enum):
     CREATE_RESISTOR = 0
     SET_VALUE = 1
+    CALC_SERIES = 2

@@ -1,6 +1,9 @@
 grammar cev;
 
-stmt: resistor;
+stmt: connection;
+
+connection  : connection '+' connection #series_connection
+            | resistor              #element;
 
 resistor: value=NUMBER UNIT_RESISTOR;
 

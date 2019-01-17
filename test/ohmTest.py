@@ -13,3 +13,10 @@ class ohmTest(unittest.TestCase):
         self.assertEqual(compiler.executeLine("10 Ohm"), goal)
         self.assertEqual(compiler.executeLine("10Ohm"), goal)
         self.assertEqual(compiler.executeLine("10R"), goal)
+
+    def test_series_connection(self):
+        compiler = CEVCompiler()
+
+        self.assertEqual(compiler.executeLine("10R + 20R"), Resistor(30))
+
+        self.assertEqual(compiler.executeLine("10R + 20R +3 R"), Resistor(33))

@@ -17,6 +17,24 @@ class cevListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by cevParser#element.
+    def enterElement(self, ctx:cevParser.ElementContext):
+        pass
+
+    # Exit a parse tree produced by cevParser#element.
+    def exitElement(self, ctx:cevParser.ElementContext):
+        pass
+
+
+    # Enter a parse tree produced by cevParser#series_connection.
+    def enterSeries_connection(self, ctx:cevParser.Series_connectionContext):
+        pass
+
+    # Exit a parse tree produced by cevParser#series_connection.
+    def exitSeries_connection(self, ctx:cevParser.Series_connectionContext):
+        pass
+
+
     # Enter a parse tree produced by cevParser#resistor.
     def enterResistor(self, ctx:cevParser.ResistorContext):
         pass
