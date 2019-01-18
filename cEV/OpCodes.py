@@ -1,9 +1,10 @@
-from enum import Enum, unique
+from enum import Enum, unique,auto
 
 
 @unique
 class OpCodes(Enum):
-    CREATE_RESISTOR = 0
-    SET_VALUE = 1
-    CALC_SERIES = 2
-    CALC_PARALLEL = 3
+    CREATE_RESISTOR = auto()
+    CREATE_VOLTAGESOURCE = auto()
+    SET_VALUE = auto()
+    CALC_SERIES = auto()
+    CALC_PARALLEL = auto()

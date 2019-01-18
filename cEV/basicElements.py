@@ -22,3 +22,17 @@ class Resistor:
 
     def __repr__(self):
         return "R: %d Ohm" % self.value
+
+
+class VoltageSource:
+    def __init__(self, value: float = 0):
+        self.value = value
+
+    def __eq__(self, other):
+        if isinstance(other, VoltageSource):
+            return other.value == self.value
+
+        return False
+
+    def __repr__(self):
+        return "U: %d V" % self.value

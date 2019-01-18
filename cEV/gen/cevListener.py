@@ -53,3 +53,12 @@ class cevListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by cevParser#voltage.
+    def enterVoltage(self, ctx:cevParser.VoltageContext):
+        pass
+
+    # Exit a parse tree produced by cevParser#voltage.
+    def exitVoltage(self, ctx:cevParser.VoltageContext):
+        pass
+
+

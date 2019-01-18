@@ -1,7 +1,7 @@
 from collections import deque
 
 from cEV.OpCodes import OpCodes
-from cEV.basicElements import Resistor
+from cEV.basicElements import Resistor, VoltageSource
 
 
 class Stack(deque):
@@ -19,6 +19,7 @@ class Machine:
         self.code = code
         self.dispatch_map = {
             OpCodes.CREATE_RESISTOR: self.__create_resitor,
+            OpCodes.CREATE_VOLTAGESOURCE: self.__create_voltage,
             OpCodes.SET_VALUE: self.__set_value,
             OpCodes.CALC_SERIES: self.__calc_series,
             OpCodes.CALC_PARALLEL: self.__calc_parallel,
@@ -49,6 +50,9 @@ class Machine:
 
     def __create_resitor(self):
         self.push(Resistor())
+
+    def __create_voltage(self):
+        self.push(VoltageSource())
 
     def __set_value(self):
         value = self.pop()
