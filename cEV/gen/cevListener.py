@@ -17,6 +17,33 @@ class cevListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by cevParser#function.
+    def enterFunction(self, ctx:cevParser.FunctionContext):
+        pass
+
+    # Exit a parse tree produced by cevParser#function.
+    def exitFunction(self, ctx:cevParser.FunctionContext):
+        pass
+
+
+    # Enter a parse tree produced by cevParser#voltageFunction.
+    def enterVoltageFunction(self, ctx:cevParser.VoltageFunctionContext):
+        pass
+
+    # Exit a parse tree produced by cevParser#voltageFunction.
+    def exitVoltageFunction(self, ctx:cevParser.VoltageFunctionContext):
+        pass
+
+
+    # Enter a parse tree produced by cevParser#connectionComponent.
+    def enterConnectionComponent(self, ctx:cevParser.ConnectionComponentContext):
+        pass
+
+    # Exit a parse tree produced by cevParser#connectionComponent.
+    def exitConnectionComponent(self, ctx:cevParser.ConnectionComponentContext):
+        pass
+
+
     # Enter a parse tree produced by cevParser#parallel_connection.
     def enterParallel_connection(self, ctx:cevParser.Parallel_connectionContext):
         pass
@@ -26,21 +53,48 @@ class cevListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by cevParser#element.
-    def enterElement(self, ctx:cevParser.ElementContext):
-        pass
-
-    # Exit a parse tree produced by cevParser#element.
-    def exitElement(self, ctx:cevParser.ElementContext):
-        pass
-
-
     # Enter a parse tree produced by cevParser#series_connection.
     def enterSeries_connection(self, ctx:cevParser.Series_connectionContext):
         pass
 
     # Exit a parse tree produced by cevParser#series_connection.
     def exitSeries_connection(self, ctx:cevParser.Series_connectionContext):
+        pass
+
+
+    # Enter a parse tree produced by cevParser#resistorComponent.
+    def enterResistorComponent(self, ctx:cevParser.ResistorComponentContext):
+        pass
+
+    # Exit a parse tree produced by cevParser#resistorComponent.
+    def exitResistorComponent(self, ctx:cevParser.ResistorComponentContext):
+        pass
+
+
+    # Enter a parse tree produced by cevParser#voltageSourceComponent.
+    def enterVoltageSourceComponent(self, ctx:cevParser.VoltageSourceComponentContext):
+        pass
+
+    # Exit a parse tree produced by cevParser#voltageSourceComponent.
+    def exitVoltageSourceComponent(self, ctx:cevParser.VoltageSourceComponentContext):
+        pass
+
+
+    # Enter a parse tree produced by cevParser#parameterList.
+    def enterParameterList(self, ctx:cevParser.ParameterListContext):
+        pass
+
+    # Exit a parse tree produced by cevParser#parameterList.
+    def exitParameterList(self, ctx:cevParser.ParameterListContext):
+        pass
+
+
+    # Enter a parse tree produced by cevParser#currentParameter.
+    def enterCurrentParameter(self, ctx:cevParser.CurrentParameterContext):
+        pass
+
+    # Exit a parse tree produced by cevParser#currentParameter.
+    def exitCurrentParameter(self, ctx:cevParser.CurrentParameterContext):
         pass
 
 
@@ -59,6 +113,15 @@ class cevListener(ParseTreeListener):
 
     # Exit a parse tree produced by cevParser#voltage.
     def exitVoltage(self, ctx:cevParser.VoltageContext):
+        pass
+
+
+    # Enter a parse tree produced by cevParser#current.
+    def enterCurrent(self, ctx:cevParser.CurrentContext):
+        pass
+
+    # Exit a parse tree produced by cevParser#current.
+    def exitCurrent(self, ctx:cevParser.CurrentContext):
         pass
 
 

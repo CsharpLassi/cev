@@ -1,4 +1,4 @@
-from enum import Enum, unique,auto
+from enum import Enum, unique, auto
 
 
 @unique
@@ -8,3 +8,6 @@ class OpCodes(Enum):
     SET_VALUE = auto()
     CALC_SERIES = auto()
     CALC_PARALLEL = auto()
+    CALC_VOLTAGE = auto()
+    CREATE_DICT = auto()
+    ADD_KEY_VALUE = auto()

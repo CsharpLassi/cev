@@ -1,7 +1,9 @@
+from __future__ import annotations
+
 from collections import deque
 
 from cEV.OpCodes import OpCodes
-from cEV.basicElements import Resistor, VoltageSource
+from cEV.basicElements import Resistor, Voltage
 
 
 class Stack(deque):
@@ -12,18 +14,21 @@ class Stack(deque):
 
 
 class Machine:
+    __dispatch_map = dict()
+
     def __init__(self, code):
         self.data_stack = Stack()
         self.return_addr_stack = Stack()
         self.instruction_pointer = 0
         self.code = code
-        self.dispatch_map = {
-            OpCodes.CREATE_RESISTOR: self.__create_resitor,
-            OpCodes.CREATE_VOLTAGESOURCE: self.__create_voltage,
-            OpCodes.SET_VALUE: self.__set_value,
-            OpCodes.CALC_SERIES: self.__calc_series,
-            OpCodes.CALC_PARALLEL: self.__calc_parallel,
-                             }
+
+    @staticmethod
+    def register(opcode: OpCodes):
+        def helper(func):
+            Machine.__dispatch_map[opcode] = func
+            return func
+
+        return helper
 
     def run(self):
         while self.instruction_pointer < len(self.code):
@@ -41,27 +46,63 @@ class Machine:
         return self.data_stack.top()
 
     def dispatch(self, op):
-        if op in self.dispatch_map:
-            self.dispatch_map[op]()
+        if op in self.__dispatch_map:
+            self.__dispatch_map[op](self)
         elif isinstance(op, int) or isinstance(op, float):
+            self.push(op)
+        elif isinstance(op, str):
             self.push(op)
         else:
             raise RuntimeError("Unknown opcode: '%s'" % op)
 
-    def __create_resitor(self):
-        self.push(Resistor())
 
-    def __create_voltage(self):
-        self.push(VoltageSource())
+@Machine.register(OpCodes.CREATE_RESISTOR)
+def __create_resitor(self: Machine):
+    self.push(Resistor())
 
-    def __set_value(self):
-        value = self.pop()
-        element = self.pop()
-        element.value = value
-        self.push(element)
 
-    def __calc_series(self):
-        self.push(self.pop() + self.pop())
+@Machine.register(OpCodes.CREATE_VOLTAGESOURCE)
+def __create_voltage(self: Machine):
+    self.push(Voltage())
 
-    def __calc_parallel(self):
-        self.push(self.pop() | self.pop())
+
+@Machine.register(OpCodes.SET_VALUE)
+def __set_value(self: Machine):
+    value = self.pop()
+    element = self.pop()
+    element.value = value
+    self.push(element)
+
+
+@Machine.register(OpCodes.CALC_SERIES)
+def __calc_series(self: Machine):
+    self.push(self.pop() + self.pop())
+
+
+@Machine.register(OpCodes.CALC_PARALLEL)
+def __calc_parallel(self: Machine):
+    self.push(self.pop() | self.pop())
+
+
+@Machine.register(OpCodes.CREATE_DICT)
+def __create_dict(self: Machine):
+    self.push(dict())
+
+
+@Machine.register(OpCodes.ADD_KEY_VALUE)
+def __create_dict(self: Machine):
+    value = self.pop()
+    key = self.pop()
+    value_dict = self.pop()
+
+    value_dict[key] = value
+    self.push(value_dict)
+
+
+@Machine.register(OpCodes.CALC_VOLTAGE)
+def __calc_volage(self: Machine):
+    kargs = self.pop()
+    item = self.pop()
+
+    result = item.calc_voltage(**kargs)
+    self.push(result)
